@@ -7,6 +7,7 @@ appliesToExtraTemplate.className = "applies-to-extra";
 appliesToExtraTemplate.innerHTML = " " + t('appliesDisplayTruncatedSuffix');
 
 chrome.runtime.sendMessage({method: "getStyles"}, showStyles);
+firebase.initializeApp(globalConfig.fbConfig);
 
 function showStyles(styles) {
     if (!styles) { // Chrome is starting up
