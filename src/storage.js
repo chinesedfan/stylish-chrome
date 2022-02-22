@@ -140,10 +140,10 @@ function saveStyle(o, callback) {
             // IMPORTANT - this line will check if the user is an already using one, or new to the extension
             // this logic is only for research period;
             var existedUser = styles.filter(s => !s.isNew).length;
-            if (existedStyle || existedUser > 0) {
+            // if (existedStyle || existedUser > 0) {
                 saveStyleToStorage(o, callback);
                 return;
-            }
+            // }
             axios.get(globalConfig.apiBaseUrl + '/styles/installStylesLimit', config)
               .then(function (response){
 
