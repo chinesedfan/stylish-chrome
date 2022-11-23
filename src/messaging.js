@@ -214,7 +214,7 @@ function updateIcon(tab, styles) {
         var disableAll = "disableAll" in styles ? styles.disableAll : prefs.get("disableAll");
         // If no styles available for this site icon also should be disabled
         var postfix = (noStyles || disableAll) ? "w" : "";
-        chrome.browserAction.setIcon({
+        chrome.action.setIcon({
                 path: "images/128" + postfix + ".png",
                 tabId: tab.id
             },
@@ -223,9 +223,9 @@ function updateIcon(tab, styles) {
                 // e.g. 'windowPosition' pref updated in edit.js::window.onbeforeunload
                 if (!chrome.runtime.lastError) {
                     var t = prefs.get("show-badge") && styles.length ? ("" + styles.length) : "";
-                    chrome.browserAction.setBadgeText({text: t, tabId: tab.id});
+                    chrome.action.setBadgeText({text: t, tabId: tab.id});
                     var col = disableAll ? "#aaa" : "#3498db";
-                    chrome.browserAction.setBadgeBackgroundColor({color: col});
+                    chrome.action.setBadgeBackgroundColor({color: col});
                 }
             }
         )

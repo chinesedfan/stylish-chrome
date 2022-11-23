@@ -470,7 +470,7 @@ if ("commands" in chrome) {
     chrome.commands.onCommand.addListener(function (command) {
         switch (command) {
             case "openManage":
-                openURL({url: chrome.extension.getURL("manage.html")});
+                openURL({url: chrome.runtime.getURL("manage.html")});
                 break;
             case "styleDisableAll":
                 disableAllStylesToggle();
@@ -576,7 +576,7 @@ getDatabase(function () {
 }, reportError);
 
 // When an edit page gets attached or detached, remember its state so we can do the same to the next one to open.
-var editFullUrl = chrome.extension.getURL("edit.html");
+var editFullUrl = chrome.runtime.getURL("edit.html");
 chrome.tabs.onAttached.addListener(function (tabId, data) {
     chrome.tabs.get(tabId, function (tabData) {
         if (tabData.url.indexOf(editFullUrl) == 0) {

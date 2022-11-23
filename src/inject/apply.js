@@ -9,7 +9,7 @@ function requestStyles() {
     // unless Chrome still starts up and the background page isn't fully loaded.
     // (Note: in this case the function may be invoked again from applyStyles.)
     var request = {method: "getStyles", matchUrl: location.href, enabled: true, asHash: true};
-    if (location.href.indexOf(chrome.extension.getURL("")) == 0) {
+    if (location.href.indexOf(chrome.runtime.getURL("")) == 0) {
         var bg = chrome.extension.getBackgroundPage();
         if (bg && bg.getStyles) {
             // apply styles immediately, then proceed with a normal request that will update the icon

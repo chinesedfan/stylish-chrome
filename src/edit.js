@@ -287,7 +287,7 @@ function acmeEventListener(event) {
                 el.selectedIndex = 0;
                 break;
             }
-            var url = chrome.extension.getURL("external/codemirror/theme/" + value + ".css");
+            var url = chrome.runtime.getURL("external/codemirror/theme/" + value + ".css");
             if (themeLink.href == url) { // preloaded in initCodeMirror()
                 break;
             }

@@ -336,7 +336,7 @@ function sectionAppliesToUrl(section, url) {
         return false;
     }
     // other extensions can't be styled
-    if (url.indexOf("chrome-extension") == 0 && url.indexOf(chrome.extension.getURL("")) != 0) {
+    if (url.indexOf("chrome-extension") == 0 && url.indexOf(chrome.runtime.getURL("")) != 0) {
         return false;
     }
     if (section.urls.length == 0 && section.domains.length == 0 && section.urlPrefixes.length == 0 && section.regexps.length == 0) {
