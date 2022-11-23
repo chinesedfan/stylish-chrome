@@ -14,7 +14,7 @@ var utils = (function () {
         browser.name = "sogou";
     } else if (isInUA("spark")) {
         browser.name = "spark";
-    } else if (external) {
+    } else if (typeof external !== 'undefined' && external) {
         if (external.hasOwnProperty("GetSparkInfo")) {
             browser.name = "spark";
         } else if (external.hasOwnProperty("GetOriginalUrl")) {

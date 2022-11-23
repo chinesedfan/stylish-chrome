@@ -521,7 +521,7 @@ function initFilter(className, node) {
 
 document.addEventListener("DOMContentLoaded", async function () {
 
-    const browser = chrome.extension.getBackgroundPage().utils.getBrowser().name.toLowerCase();
+    const browser = utils.getBrowser().name.toLowerCase();
     document.getElementById('get-help-link').setAttribute('href', `https://userstyles.org/help/stylish_${browser === 'firefox' ? 'firefox' : 'chrome'}`);
 
     installed = document.getElementById("installed");

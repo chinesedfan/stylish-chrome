@@ -2,7 +2,7 @@ const globalKeys = {};
 
 
 function getDatabase(ready, error) {
-    var dbOpenRequest = window.indexedDB.open("stylish", 2);
+    var dbOpenRequest = indexedDB.open("stylish", 2);
     dbOpenRequest.onsuccess = function (e) {
         ready(e.target.result);
     };
@@ -582,7 +582,7 @@ function installRepls(arrObj, keyCommands) {
     return retVal;
 }
 
-var prefs = chrome.extension.getBackgroundPage().prefs || new function Prefs() {
+function Prefs() {
     var me = this;
     var methodFields = "ourself";
     var boundWrappers = {};
@@ -902,7 +902,8 @@ var prefs = chrome.extension.getBackgroundPage().prefs || new function Prefs() {
         }
         return value;
     }
-};
+}
+var prefs = new Prefs();
 
 function findRepls(repl, kc) {
     var apk = prefs.get(repl);
