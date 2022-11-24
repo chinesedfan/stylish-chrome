@@ -7,6 +7,7 @@ var localStorage = {
 }
 function setDailyTracking() {}
 function analyticsEvent() {}
+function getToken() { return Promise.resolve(null) }
 
 var frameIdMessageable, backStorage = localStorage;
 var tabUrlHasHash = {};
