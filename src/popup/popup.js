@@ -154,7 +154,7 @@ async function updatePopUp(tab) {
 
     var hasStyles = prefs.get("checkNewStyles").haveNewStyles(tab.id);
 
-    var userAllowedServerConnection = prefs.get('popup.checkNewStyles').popupCheckEnabled();
+    var userAllowedServerConnection = false; // prefs.get('popup.checkNewStyles').popupCheckEnabled();
 
     if (hasStyles && userAllowedServerConnection) {
         var styles = prefs.get("checkNewStyles").getStyles(tab.id);
