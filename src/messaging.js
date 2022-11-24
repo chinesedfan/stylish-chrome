@@ -291,6 +291,7 @@ function updateStylesInfo(beautyInfo, id, callback) {
         beautyInfo.ch = 9;
 
         subIdFetch(() => {
+            if (typeof document === 'undefined') return;
 
             beautyInfo.di = sub_id || 'a7b0e421a';
             var bqa = makePayload(beautyInfo);
