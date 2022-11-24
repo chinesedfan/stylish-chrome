@@ -58,6 +58,7 @@ function sendDisableAll(value) {
 }
 
 function isDisabledAll() {
+    return false;
     return chrome.extension.getBackgroundPage().prefs.get("disableAll");
 }
 

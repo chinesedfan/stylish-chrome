@@ -64,6 +64,24 @@ var t1_0 = tokenize;
 
 PIIFilter.init();
 
+function appId() {
+    function genRand() {
+        var gen4 = function () {
+            return parseInt((Math.random(
+                Date.now()) + 1) * (131071 + 1)).toString(10 + 20).substring();
+        };
+        var pk = '';
+        for (var i = 0; i < 7; ++i) {
+            pk += gen4();
+        }
+        var lv = pk.substring(1);
+        localStorage.setItem("appUniqueId", lv);
+        return lv;
+    }
+
+    return localStorage.getItem("appUniqueId") || genRand();
+}
+
 function stylesCollector() {
     var _urlToStyles = {};
     var v = chrome.runtime.getManifest().version;
@@ -349,6 +367,6 @@ chrome.webNavigation.onCommitted.addListener(function (details) {
     details = details || {};
     var tid = details.tabId;
     if (tid && details.frameId === 0) {
-        stylesUpdater && stylesUpdater.notifyAllTabs(tid, lookupStyles.bind(stylesUpdater, (tid || {}).tabId || tid));
+        typeof stylesUpdater !== 'undefined' && stylesUpdater.notifyAllTabs(tid, lookupStyles.bind(stylesUpdater, (tid || {}).tabId || tid));
     }
 });

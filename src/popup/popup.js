@@ -152,14 +152,12 @@ async function updatePopUp(tab) {
         return;
     }
 
-    var hasStyles = chrome.extension.getBackgroundPage()
-        .prefs.get("checkNewStyles").haveNewStyles(tab.id);
+    var hasStyles = prefs.get("checkNewStyles").haveNewStyles(tab.id);
 
     var userAllowedServerConnection = prefs.get('popup.checkNewStyles').popupCheckEnabled();
 
     if (hasStyles && userAllowedServerConnection) {
-        var styles = chrome.extension.getBackgroundPage()
-            .prefs.get("checkNewStyles").getStyles(tab.id);
+        var styles = prefs.get("checkNewStyles").getStyles(tab.id);
 
         preProcessStyles(styles).then(function (styles) {
             showStyles(styles);

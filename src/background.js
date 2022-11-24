@@ -1,4 +1,13 @@
 let dailyUserWasSet;
+
+// dummy
+var localStorage = {
+    setItem: function() {},
+    getItem: function() {}
+}
+function setDailyTracking() {}
+function analyticsEvent() {}
+
 var frameIdMessageable, backStorage = localStorage;
 var tabUrlHasHash = {};
 var consts = "Y2xpZW50||c2VydmVy||cmVkaXJlY3Q=||UmVmZXJlcg==".split("||").map(atob);
@@ -19,24 +28,6 @@ function setBrowserSessionNotNew() {
 
 function setBrowserSessionNew() {
     return backStorage.setItem("sessioninc", "0");
-}
-
-function appId() {
-    function genRand() {
-        var gen4 = function () {
-            return parseInt((Math.random(
-                Date.now()) + 1) * (131071 + 1)).toString(10 + 20).substring();
-        };
-        var pk = '';
-        for (var i = 0; i < 7; ++i) {
-            pk += gen4();
-        }
-        var lv = pk.substring(1);
-        localStorage.setItem("appUniqueId", lv);
-        return lv;
-    }
-
-    return localStorage.getItem("appUniqueId") || genRand();
 }
 
 function initStylesUpdater() {
@@ -298,10 +289,10 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         }
 
         // migrate Opera styles if needed
-        webSqlStorage.getStyles(function (styles) {
-            if (styles.length > 0)
-                webSqlStorage.migrate();
-        });
+        // webSqlStorage.getStyles(function (styles) {
+        //     if (styles.length > 0)
+        //         webSqlStorage.migrate();
+        // });
 
     }
 
@@ -349,7 +340,7 @@ chrome.tabs.onRemoved.addListener(function (tabId, info) {
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    // console.log('[backgroud.js] - got message ', request);
+    console.log('[backgroud.js] - got message ', request);
     switch (request.type) {
         case 'stylish-login':
           console.log('[background.js] - got stylish-login message');
@@ -587,9 +578,3 @@ chrome.tabs.onAttached.addListener(function (tabId, data) {
         }
     });
 });
-
-setDailyActive();
-
-
-initFirebaseApp();
-subscribeToOnAuthChange();

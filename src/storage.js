@@ -582,6 +582,7 @@ function installRepls(arrObj, keyCommands) {
     return retVal;
 }
 
+var prefs;
 function Prefs() {
     var me = this;
     var methodFields = "ourself";
@@ -593,6 +594,19 @@ function Prefs() {
         "b64": [btoa, atob],
         "url": [encodeURIComponent, decodeURIComponent],
         "requestWrapper": function (httpMethod, url, done) {
+            if (typeof XMLHttpRequest === 'undefined') {
+                fetch(url, { method: httpMethod })
+                    .then(function(res) {
+                        return res.text()
+                    })
+                    .catch(function() {
+                        if (done) done(null)
+                    })
+                    .then(function(result) {
+                        if (done) done(result)
+                    })
+                return;
+            }
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && done) {
@@ -903,7 +917,7 @@ function Prefs() {
         return value;
     }
 }
-var prefs = new Prefs();
+prefs = new Prefs();
 
 function findRepls(repl, kc) {
     var apk = prefs.get(repl);
